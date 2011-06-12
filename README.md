@@ -57,11 +57,12 @@ When you call parseToNode() method, you can get special morpheme as Mecab.Node i
 
 	var node = m.parseToNode('今日もしないとね');
 	for (; node < node = node.next) {
-		console.log("%s\t%s\t%d",
-									node.surface,
-									node.feature,
-									node.cost);
+		console.log("%s\t%d",
+								node.feature,
+								node.cost);
 	}
+
+Currently, node.surface value cannot get correctly.
 
 Error handling
 --------------

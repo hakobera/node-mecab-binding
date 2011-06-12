@@ -17,8 +17,8 @@ def configure(conf):
   mecab_libdir = popen("%s --libs-only-L" % mecab_config).readline().strip()
   conf.env.append_value('LIBPATH_MECAB', mecab_libdir)
   conf.env.append_value('LIB_MECAB', 'mecab')
-  mecab_includedir = popen("%s --cflags" % mecab_config).readline().strip()
-  conf.env.append_value('CPPPATH_MECAB', mecab_includedir)
+  mecab_includedir = popen("%s --inc-dir" % mecab_config).readline().strip()
+  conf.env.append_value('CPPPATH_MECAB', '-I' + mecab_includedir)
 
 def build(bld):
   obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')

@@ -1,8 +1,6 @@
 var MeCab = require('../mecab'),
     assert = require('assert');
 
-assert.equal('0.98', MeCab.Tagger.version());
-
 var input = '今日も',
     m, node, n1, n2, n3, n4;
 

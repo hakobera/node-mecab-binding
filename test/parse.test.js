@@ -1,7 +1,12 @@
 var MeCab = require('../mecab'),
-    assert = require('assert');
+    assert = require('assert'),
+    exec = require('child_process').exec,
+    child;
 
-assert.equal('0.98', MeCab.Tagger.version());
+child = exec('mecab -v', function(err, stdout, stderr) {
+  console.log(stdout);
+  assert.equal(stdout, 'mecab of ' + MeCab.Tagger.version() + '\n\n');
+});
 
 var input = '今日もしないとね',
     m, result;

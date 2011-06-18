@@ -38,7 +38,7 @@ Mecab.Tagger constuctor arguments is same as executable mecab command line inter
 
 	var MeCab = require('mecab-binding');
 	var m = new MeCab.Tagger('-O wakati');
-	consoloe.log(m->parse('今日もしないとね'));
+	consoloe.log(m.parse('今日もしないとね'));
 
 This is similar to other language binding.
 http://mecab.sourceforge.net/bindings.html

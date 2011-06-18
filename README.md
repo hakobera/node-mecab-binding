@@ -57,9 +57,7 @@ When you call parseToNode() method, you can get special morpheme as Mecab.Node i
 
 	var n = m.parseToNode('今日もしないとね');
 	for (; n; n = n.next()) {
-		console.log("%s\t%d",
-								n.feature,
-								n.cost);
+		console.log("%s\t%d", n.feature, n.cost);
 	}
 
 Currently, node.surface value cannot get correctly.

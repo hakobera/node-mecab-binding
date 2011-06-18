@@ -38,7 +38,7 @@ Mecab.Tagger constuctor arguments is same as executable mecab command line inter
 
 	var MeCab = require('mecab-binding');
 	var m = new MeCab.Tagger('-O wakati');
-	consoloe.log(m.parse('今日もしないとね'));
+	console.log(m.parse('今日もしないとね'));
 
 This is similar to other language binding.
 http://mecab.sourceforge.net/bindings.html
@@ -53,13 +53,13 @@ Get more information for each word
 When you call parseToNode() method, you can get special morpheme as Mecab.Node instance. 
 
 	var MeCab = require('mecab-binding');
-	var m = new Mecab.Tagger('');
+	var m = new MeCab.Tagger('');
 
-	var node = m.parseToNode('今日もしないとね');
-	for (; node < node = node.next) {
+	var n = m.parseToNode('今日もしないとね');
+	for (; n; n = n.next()) {
 		console.log("%s\t%d",
-								node.feature,
-								node.cost);
+								n.feature,
+								n.cost);
 	}
 
 Currently, node.surface value cannot get correctly.
@@ -67,14 +67,16 @@ Currently, node.surface value cannot get correctly.
 Error handling
 --------------
 
-If error has occured, throws Error.
+If error has occurred, mecab-binding throws Error.
+So, if you want to handle it, write try-catch block.
 
 	var MeCab = require('mecab-binding');
 
 	try {
 		var m = new MeCab.Tagger('-d .');
-		console.log(m.parse('今日もしないとね');
+		console.log(m.parse('今日もしないとね'));
 	} catch (e) {
+	  console.log('Illegal argument error occurred.');
 		console.log(e);
 	}
 

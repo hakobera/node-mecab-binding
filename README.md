@@ -8,8 +8,8 @@ Not all features are supported now.
 Requirement
 ===========
 
-- Node.js >= 0.4.5
-- MeCab >= 0.9.8
+- Node.js >= 0.4.0
+- MeCab >= 0.9.7
 
 
 How to install

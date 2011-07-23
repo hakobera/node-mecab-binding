@@ -1,6 +1,6 @@
 {
   "name": "mecab-binding",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Very simple MeCab binding for Node",
   "author": "Kazuyuki Honda <hakobera@gmail.com>",
   "repository": {
@@ -12,6 +12,6 @@
     "install": "node-waf configure build"
   },
   "engines": {
-    "node": ">= 0.4.0 < 0.5.0"
+    "node": ">= 0.4.0 <= 0.5.2"
   }
 }

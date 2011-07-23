@@ -16,7 +16,7 @@
 using namespace v8;
 
 extern "C"
-void init (Handle<v8::Object> target)
+void init (Handle<Object> target)
 {
   HandleScope scope;
   MeCabBinding::Node::Initialize(target);

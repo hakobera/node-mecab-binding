@@ -1,8 +1,5 @@
 #include "mecab_node.h"
 
-#include <string.h>
-#include <iostream>
-
 #define SYMBOL(name) String::NewSymbol(name)
 
 #define SURFACE_SYMBOL SYMBOL("surface")
@@ -101,12 +98,7 @@ Handle<Value> Node::Getter(Local<String> property, const AccessorInfo& info)
   mecab_node_t* node = self->data;
 
   if (property == SURFACE_SYMBOL) {
-    char* s = new char[node->length + 1];
-    memcpy(s, node->surface, node->length);
-    s[node->length] = '\0';
-    Local<String> surface = String::New(s);
-    delete[] s;
-    return surface;
+    return String::New( "" ); // this is broken
   } else if (property == FEATURE_SYMBOL) {
     return String::New(node->feature);
   } else if (property == LENGTH_SYMBOL) {

@@ -29,6 +29,7 @@ protected:
 
   static Handle<Value> Parse(const Arguments& args);
   static Handle<Value> ParseToNode(const Arguments& args);
+  static Handle<Value> ParseToArray(const Arguments& args);
 
   static Handle<Value> Version(const Arguments& args);
 

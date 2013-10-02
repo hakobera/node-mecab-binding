@@ -60,7 +60,12 @@ When you call parseToNode() method, you can get special morpheme as Mecab.Node i
 		console.log("%s\t%d", n.feature, n.cost);
 	}
 
-Currently, node.surface value cannot get correctly.
+Currently, node.surface value cannot get correctly. If your focus is on surface and feature information, you can either use the parse() or the new parseToArray() method:
+
+	var arr = m.parseToArray('今日もしないとね');
+	for (var i = 0; i < arr.length; i += 2) {
+		console.log('Surface: %s\tFeature: %s', arr[i], arr[i + 1]);
+	}
 
 Error handling
 --------------

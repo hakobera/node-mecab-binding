@@ -1,5 +1,8 @@
 #include "tagger.h"
 #include "mecab_node.h"
+#include <string>
+#include <sstream>
+#include <vector>
 
 using namespace v8;
 
@@ -16,6 +19,7 @@ void Tagger::Initialize(const Handle<Object> target)
 
   NODE_SET_PROTOTYPE_METHOD(t, "parse", Parse);
   NODE_SET_PROTOTYPE_METHOD(t, "parseToNode", ParseToNode);
+  NODE_SET_PROTOTYPE_METHOD(t, "parseToArray", ParseToArray);
 
   NODE_SET_METHOD(t->GetFunction(), "version", Version);
 
@@ -113,6 +117,52 @@ Handle<Value> Tagger::ParseToNode(const Arguments& args)
 
   return scope.Close(Node::New(result));
 }
+
+
+
+// ParseToArray impl--------------------------------------------------
+//
+Handle<Value> Tagger::ParseToArray(const Arguments& args)
+{
+  Tagger* tagger = node::ObjectWrap::Unwrap<Tagger>(args.This());
+
+  HandleScope scope;
+
+  if (args.Length() == 0 || !args[0]->IsString()) {
+    return ThrowException(Exception::Error(String::New("Must give input string as argument in parse()")));
+  }
+
+  String::Utf8Value input(args[0]->ToString());
+
+  const mecab_node_t* result = tagger->ParseToNode(*input);
+
+  if (result == NULL) {
+      return ThrowException(Exception::Error(String::New(mecab_strerror(tagger->mecab))));
+  }
+
+  // parse everything at once
+  std::vector<std::string> strings;
+  for(; result; result = result->next) {
+    // the surface
+    std::stringstream ss;
+    ss.write(result->surface, result->length);
+    strings.push_back(ss.str());
+    // the feature
+    strings.push_back(std::string(result->feature));
+  }
+
+  // build array of strings
+  Local<Array> arr = Array::New(strings.size());
+  for(int i = 0; i < strings.size(); ++i){
+    arr->Set(i, String::New( strings[i].c_str() ));
+  }
+
+  return scope.Close(arr);
+}
+//
+// -------------------------------------------------------------------
+
+
 
 Handle<Value> Tagger::Version(const Arguments& args)
 {
